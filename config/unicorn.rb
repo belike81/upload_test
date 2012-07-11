@@ -1,19 +1,19 @@
 # define paths and filenames
 deploy_to = "/home/deployer/apps/upload_test"
-rails_root = "#{deploy_to}/current"
 pid_file = "#{deploy_to}/shared/pids/unicorn.pid"
-socket_file= "#{deploy_to}/shared/unicorn.sock"
-log_file = "#{rails_root}/log/unicorn.log"
-err_log = "#{rails_root}/log/unicorn_error.log"
+socket_file= "/tmp/unicorn.upload_test.sock"
+err_log = "#{deploy_to}/log/unicorn.log"
+log_file = "#{deploy_to}/log/unicorn.log"
 old_pid = pid_file + '.oldbin'
 
 timeout 30
 worker_processes 2 # increase or decrease
-listen socket_file, :backlog => 1024
 
+working_directory "#{deploy_to}/current"
 pid pid_file
 stderr_path err_log
 stdout_path log_file
+listen socket_file, :backlog => 1024
 
 # make forks faster
 preload_app true
