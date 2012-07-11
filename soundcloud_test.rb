@@ -16,7 +16,7 @@ class Upload < Sinatra::Base
   post '/' do
     content_type 'application/json', :charset => 'utf-8' if request.xhr?
 
-    path = File.join(Dir.pwd, 'public/uploads', Base64.encode64(Time.now.to_s) + params[:file][:filename])
+    path = File.join(settings.root, 'public/uploads', Base64.encode64(Time.now.to_s) + params[:file][:filename])
     File.open(path, 'wb') { |f| f.write params[:file][:tempfile].read }
     path.to_json
   end
