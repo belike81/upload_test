@@ -39,7 +39,7 @@ $(function() {
         success : function(data, status, xhr) {
           bar.fadeOut(300, function(){
             file_input.before('<input type="hidden" value="' + data + '" name="file_path">');
-            file_input.after('<div class="uploaded_to">Uploaded to: ' + data);
+            file_input.after('<div class="uploaded_to">Uploaded to: <a href="' + data + '">' + data + '</a></div>');
           }); // Remove the upload bar
         },
         complete : function(xhr, status) {
